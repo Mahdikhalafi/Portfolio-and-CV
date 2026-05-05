@@ -1,0 +1,169 @@
+/* Theme colors */
+:root {
+  --bg: #6d6f70;
+  --header-bg: #7a7c7e;
+  --accent: #c9d6ff;
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.6);
+}
+
+/* General styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body {
+  font-family: "Aptos", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 20px;
+  text-align: left;
+  opacity: 1;
+}
+
+/* Fade effects */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Header and footer styles */
+.site-header, .site-footer {
+  background: var(--header-bg);
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Navigation styles */
+.site-header nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 12px;
+  flex-wrap: wrap;
+}
+
+.site-header nav ul {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.site-header nav ul li {
+  display: block;
+}
+
+.site-header nav a {
+  display: inline-block;
+  padding: 8px 12px;
+  color: var(--text);
+  background: transparent;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 180ms ease, color 180ms ease, transform 160ms ease, box-shadow 160ms ease;
+  font-weight: 600;
+  outline: none;
+}
+
+.site-header nav a:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-2px);
+  color: var(--accent);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.site-header nav a:focus {
+  box-shadow: 0 0 0 3px rgba(201,214,255,0.12);
+  background: rgba(201,214,255,0.04);
+  color: var(--accent);
+  transform: none;
+}
+
+.site-header nav a.active,
+.site-header nav a[aria-current="page"] {
+  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(201,214,255,0.02));
+  color: var(--accent);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+}
+
+/* Styles for small screens */
+@media (max-width: 420px) {
+  .site-header nav ul {
+    gap: 8px;
+  }
+
+  .site-header nav a {
+    padding: 10px 14px;
+    font-size: 15px;
+  }
+
+  /* Hamburger menu styles */
+  #nav-toggle {
+    display: block;
+    cursor: pointer;
+    font-size: 24px;
+    margin-left: auto;
+  }
+
+  .site-header nav ul {
+    display: none; /* Hide menu by default */
+  }
+
+  .site-header nav.active ul {
+    display: flex;
+    flex-direction: column; /* Vertical layout for menu items */
+    width: 100%;
+  }
+}
+
+/* General link styles */
+a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Input and textarea styling */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  background: transparent;
+}
+
+/* Placeholder text styling */
+input::placeholder,
+textarea::placeholder {
+  color: #333;
+  opacity: 1;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Button styling */
+.btn {
+  background: var(--header-bg);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
