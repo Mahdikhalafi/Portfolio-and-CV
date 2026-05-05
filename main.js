@@ -1,82 +1,95 @@
-// Page transition effect
 document.addEventListener("DOMContentLoaded", function () {
   const body = document.body;
   body.classList.add('fade-in');
 
-  document.querySelectorAll('a').forEach(link => {
+  // Page transition effect
+  document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', function (e) {
-      e.preventDefault();
       const href = this.getAttribute('href');
 
-      body.classList.remove('fade-in');
-      body.classList.add('fade-out');
+      // Exclude anchor and external links
+      if (!href.startsWith('#') && !href.startsWith('http')) {
+        e.preventDefault();
+        body.classList.remove('fade-in');
+        body.classList.add('fade-out');
 
-      setTimeout(() => {
-        window.location.href = href;
-      }, 500);
+        setTimeout(() => {
+          window.location.href = href;
+        }, 500);
+      }
     });
   });
-});
 
-// Mobile-friendly navigation toggle
-const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('site-nav');
+  // Mobile-friendly navigation toggle
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('site-nav');
 
-navToggle.addEventListener('click', () => {
-  navMenu.classList.toggle('active');
-  navToggle.classList.toggle('open');
-});
-
-// Close menu on link click for mobile
-navMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navMenu.classList.remove('active');
-    navToggle.classList.remove('open');
-  });
-});
-
-// Smooth scrolling for internal links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      navToggle.classList.toggle('open');
     });
-  });
-});
 
-// Image carousel functionality with touch support
-const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
-let currentIndex = 0;
-
-document.getElementById('next').onclick = () => {
-  currentIndex = (currentIndex + 1) % images.length;
-  document.getElementById('carousel-image').src = images[currentIndex];
-};
-document.getElementById('prev').onclick = () => {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  document.getElementById('carousel-image').src = images[currentIndex];
-};
-
-// Touch support for carousel
-const carousel = document.getElementById('carousel-image');
-let startX = 0;
-
-carousel.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-});
-
-carousel.addEventListener('touchend', (e) => {
-  const endX = e.changedTouches[0].clientX;
-  if (startX > endX + 50) {
-    document.getElementById('next').click();
-  } else if (startX < endX - 50) {
-    document.getElementById('prev').click();
+    // Close menu on link click for mobile
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('open');
+      });
+    });
   }
-});
 
-// Toggle dark/light mode
-const toggleButton = document.getElementById('theme-toggle');
-toggleButton.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
+  // Smooth scrolling for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  // Image carousel functionality with touch support
+  const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
+  let currentIndex = 0;
+
+  const nextButton = document.getElementById('next');
+  const prevButton = document.getElementById('prev');
+  const carouselImage = document.getElementById('carousel-image');
+
+  if (nextButton && prevButton && carouselImage) {
+    nextButton.onclick = () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      carouselImage.src = images[currentIndex];
+    };
+
+    prevButton.onclick = () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      carouselImage.src = images[currentIndex];
+    };
+
+    // Touch support for carousel
+    let startX = 0;
+
+    carouselImage.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    carouselImage.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      if (startX > endX + 50) {
+        nextButton.click();
+      } else if (startX < endX - 50) {
+        prevButton.click();
+      }
+    });
+  }
+
+  // Toggle dark/light mode
+  const toggleButton = document.getElementById('theme-toggle');
+  if (toggleButton) {
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  }
 });
