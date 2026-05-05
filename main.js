@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
-      
+
       // Ensure it's not an anchor or external link
       if (!href.startsWith('#') && !href.startsWith('http')) {
         e.preventDefault();
