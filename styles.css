@@ -1,156 +1,184 @@
 /* Theme colors */
 :root {
-  --bg: #6d6f70;        /* This sets the background color of the page */
-  --header-bg: #7a7c7e; /* This is the background color for the header and navigation */
-  --accent: #c9d6ff;    /* A soft accent color for hover and active states */
-  --text: #ffffff;      /* The main text color for easy reading */
-  --muted: rgba(255,255,255,0.6); /* A muted color for less emphasis */
+  --bg: #6d6f70;
+  --header-bg: #7a7c7e;
+  --accent: #c9d6ff;
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.6);
 }
 
 /* General styles */
 html, body {
-  height: 100%; /* Ensures the body takes up the full height */
-  margin: 0;    /* Resets margin to avoid any unwanted space */
-  transition: background-color 0.5s ease, color 0.5s ease; /* Simple fade transition for background and text color */
+  height: 100%;
+  margin: 0;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 body {
-  font-family: "Aptos", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif; /* A clean and modern font stack */
-  background: var(--bg); /* Sets the background color */
-  color: var(--text); /* Sets the text color */
-  line-height: 1.6; /* Provides comfortable spacing between lines of text */
-  padding: 20px; /* Prevents content from touching the browser edges */
-  text-align: left; /* Aligns text to the left for readability */
-  opacity: 1; /* Ensure body starts fully visible */
+  font-family: "Aptos", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 20px;
+  text-align: left;
+  opacity: 1;
 }
 
 /* Fade out effect */
 .fade-out {
-  opacity: 0; /* Start hidden */
-  transition: opacity 0.5s ease; /* Smooth transition for fading */
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 /* Fade in effect */
 .fade-in {
-  opacity: 1; /* Fully visible */
-  transition: opacity 0.5s ease; /* Smooth transition for fading */
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
 .container {
-  max-width: 600px; /* Limits content width for better readability on larger screens */
+  max-width: 600px;
 }
 
 /* Header and footer styles */
 .site-header, .site-footer {
-  background: var(--header-bg); /* Consistent background for header and footer */
-  padding: 10px 0; /* Small padding for a lighter feel */
+  background: var(--header-bg);
+  padding: 10px 0;
 }
 
 /* Navigation styles */
 .site-header nav {
-  display: flex; /* Uses flexbox for layout */
-  justify-content: center; /* Centers the navigation items */
-  align-items: center; /* Vertically centers the items */
-  gap: 24px; /* Space between navigation items */
-  padding: 8px 12px; /* Adds breathing room around the links */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 12px;
 }
 
 /* Making the <ul> a flex container for cleaner layout */
 .site-header nav ul {
-  display: flex; /* Uses flexbox for horizontal layout */
-  gap: 16px; /* Even spacing between each link */
-  list-style: none; /* Removes default list styling */
-  margin: 0; /* Resets margin */
-  padding: 0; /* Resets padding */
-  align-items: center; /* Vertically aligns items in the center */
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
 }
 
 /* Simple, predictable styles for each <li> */
 .site-header nav ul li {
-  display: block; /* Makes each list item a block for easier styling */
+  display: block;
+  position: relative; /* Allows dropdown positioning */
+}
+
+/* Dropdown styles */
+.site-header nav ul li .dropdown {
+  display: none;
+  position: absolute;
+  background: var(--header-bg);
+  padding: 10px;
+  list-style: none;
+  border-radius: 6px;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+}
+
+.site-header nav ul li:hover .dropdown {
+  display: block;
+}
+
+.site-header nav ul li .dropdown li {
+  padding: 5px 0;
+}
+
+.site-header nav ul li .dropdown li a {
+  padding: 8px 12px;
+  display: block;
+  color: var(--text);
 }
 
 /* Styling for links to enhance user experience */
 .site-header nav a {
-  display: inline-block; /* Allows for easy padding adjustments */
-  padding: 8px 12px; /* Comfortable size for clicking/tapping */
-  color: var(--text); /* Main text color */
-  background: transparent; /* No background for links by default */
-  text-decoration: none; /* Removes underlines */
-  border-radius: 6px; /* Slightly rounded corners for a softer look */
-  transition: background-color 180ms ease, color 180ms ease, transform 160ms ease, box-shadow 160ms ease; /* Smooth transitions for hover effects */
-  font-weight: 600; /* Makes text bolder for better readability */
-  outline: none; /* Removes default focus outline */
+  display: inline-block;
+  padding: 8px 12px;
+  color: var(--text);
+  background: transparent;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 180ms ease, color 180ms ease, transform 160ms ease, box-shadow 160ms ease;
+  font-weight: 600;
+  outline: none;
 }
 
 /* Hover effects for a responsive feel */
 .site-header nav a:hover {
-  background: rgba(255,255,255,0.06); /* Subtle highlight on hover */
-  transform: translateY(-2px); /* Slight lift effect to show interactivity */
-  color: var(--accent); /* Changes text color to the accent color */
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12); /* Adds a gentle shadow for depth */
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-2px);
+  color: var(--accent);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
 
 /* Focus styles for accessibility */
 .site-header nav a:focus {
-  box-shadow: 0 0 0 3px rgba(201,214,255,0.12); /* Clear focus ring for keyboard navigation */
-  background: rgba(201,214,255,0.04); /* Light background on focus */
-  color: var(--accent); /* Changes text color when focused */
-  transform: none; /* Prevents movement on focus */
+  box-shadow: 0 0 0 3px rgba(201,214,255,0.12);
+  background: rgba(201,214,255,0.04);
+  color: var(--accent);
+  transform: none;
 }
 
 /* Active/current page indication */
 .site-header nav a.active,
 .site-header nav a[aria-current="page"] {
-  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(201,214,255,0.02)); /* Subtle gradient for active links */
-  color: var(--accent); /* Accentuates the active link color */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.10); /* Adds a shadow for emphasis */
+  background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(201,214,255,0.02));
+  color: var(--accent);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.10);
 }
 
 /* Styles for small screens */
 @media (max-width: 420px) {
   .site-header nav ul {
-    gap: 8px; /* Less space between items on smaller screens */
-    flex-wrap: wrap; /* Allows items to wrap to a new line */
-    justify-content: center; /* Centers items in the new line */
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .site-header nav a {
-    padding: 10px 14px; /* Slightly larger tap area for touch devices */
-    font-size: 15px; /* Increases font size for better readability */
+    padding: 10px 14px;
+    font-size: 15px;
   }
 }
 
 /* General link styles */
 a {
-  color: var(--text); /* Uses the same text color for links */
-  text-decoration: none; /* Removes underlines for a cleaner look */
+  color: var(--text);
+  text-decoration: none;
 }
 
 /* Input and textarea styling */
 input, textarea {
-  width: 100%; /* Full width for inputs */
-  padding: 10px; /* Comfortable padding */
-  margin-bottom: 10px; /* Space below inputs */
-  border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle border for inputs */
-  border-radius: 4px; /* Rounded corners for a softer appearance */
-  background: transparent; /* Keeps the background clear */
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  background: transparent;
 }
 
 /* Placeholder text styling */
 input::placeholder,
 textarea::placeholder {
-  color: #333; /* Darker color for placeholder text for better visibility */
-  opacity: 1; /* Makes sure the placeholder is fully opaque */
-  font-size: 16px; /* Sets a readable font size */
-  font-weight: bold; /* Bold placeholder for emphasis */
+  color: #333;
+  opacity: 1;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 /* Button styling */
 .btn {
-  background: var(--header-bg); /* Matches the header background */
-  color: #fff; /* White text for contrast */
-  padding: 10px; /* Comfortable padding */
-  border: none; /* No border for a clean look */
-  cursor: pointer; /* Changes cursor to pointer for interactivity */
+  background: var(--header-bg);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
 }
